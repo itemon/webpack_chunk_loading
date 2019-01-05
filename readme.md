@@ -26,6 +26,7 @@ var installedModules = {};
 ### chunk
 ```webpack```拆分开的独立文件都叫chunk，包括CommonChunkPlugin插件拆分的独立包，以及```import```异步加载函数调用产生的异步包。
 ```chunk```通过```webpackJsonp```函数调用注册到webpack内部。调用```webpackJsonp```向已经安装的chunk集合中注册，注册完成写入标记到```installedChunks```.
+chunk是一个有序命名的数组，chunk中调用```webpackJsonp```注册chunk的索引值和chunk文件自身的命名索引匹配（默认情况下）
 
 ### module
 module主要依附于chunk存在，同时部分模块可能作为预注册模块直接打到manifest文件中。module有模块md5标记名和工厂方法。
@@ -36,5 +37,5 @@ module主要依附于chunk存在，同时部分模块可能作为预注册模块
 
 ### 异步module
 异步module被拆分为独立chunk存在，import调用被转化为```___webpack_require___.e```异步javascript文件载入调用，调用后，异步chunk是一个处于pending状态的Promise。
-一旦异步chunk载入成功，被加载的异步chunk中的```webpackJsonp```在注册异步chunk时，检测chunk自身处于pending状态，会执行promise的resolve，解除pending状态，同时调用者代码中的
-等待状态被解除，代码被执行。
+一旦异步chunk载入成功，被加载的异步chunk中的```webpackJsonp```在注册异步chunk时，检测chunk自身处于pending状态，会执行Promise的resolve，解除pending状态，同时调用者代码中的
+等待状态被解除，代码继续执行。

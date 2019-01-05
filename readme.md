@@ -24,7 +24,7 @@ var installedModules = {};
 ## chunk和module
 
 ### chunk
-```webpack```拆分开的独立文件都叫chunk，包括CommonChunkPlugin插件拆分的独立包，已经```import```异步加载函数调用产生的异步包。
+```webpack```拆分开的独立文件都叫chunk，包括CommonChunkPlugin插件拆分的独立包，以及```import```异步加载函数调用产生的异步包。
 ```chunk```通过```webpackJsonp```函数调用注册到webpack内部。调用```webpackJsonp```向已经安装的chunk集合中注册，注册完成写入标记到```installedChunks```.
 
 ### module
